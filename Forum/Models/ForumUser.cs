@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace Forum.Models
 {
-    public class ForumUser
+    public class ForumUser : IdentityUser
     {
-        public int Id { get; set; }
 
         [Required]
-        public ForumUser Author { get; set; }
+        [StringLength(256, MinimumLength = 4)]
+        public string Username { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 1)]
-        public string Title { get; set; }
-
-        [Required]
-        [StringLength(1000)]
-        public string Content { get; set; }
-
-        [Required]
-        public DateTime DatePosted { get; set; }
-
-        public virtual IEnumerable<Comment> Comments { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

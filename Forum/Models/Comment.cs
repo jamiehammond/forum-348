@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forum.Models
 {
     public class Comment
     {
+
         public int Id { get; set; }
 
         [Required]
-        public ApplicationUser Author { get; set; }
+        public ForumUser Author { get; set; }
 
         [Required]
         [StringLength(750, MinimumLength = 1)]
