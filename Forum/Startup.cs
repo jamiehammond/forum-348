@@ -31,6 +31,11 @@ namespace Forum
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var connection = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=CourseworkWebApp;Integrated Security=True;Connect Timeout=30;";
+            services.AddDbContext<ForumContext>(options => options.UseSqlServer(connection));
+            services.AddIdentity<ForumUser, IdentityRole>()
+                .AddEntityFrameworkStores<ForumContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +51,7 @@ namespace Forum
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
