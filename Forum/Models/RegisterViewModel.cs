@@ -20,6 +20,6 @@ namespace Forum.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
-        public int ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 }

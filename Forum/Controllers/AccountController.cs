@@ -1,6 +1,7 @@
 ﻿using Forum.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Forum.Controllers
 {
@@ -26,7 +27,7 @@ namespace Forum.Controllers
 
         // Register post method
         [HttpPost]
-        public async System.Threading.Tasks.Task<IActionResult> RegisterAsync(RegisterViewModel vm)
+        public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             // If entered information is valid:
             if (ModelState.IsValid)
