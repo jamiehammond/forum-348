@@ -6,9 +6,7 @@ namespace Forum.Models
     public class ForumUser : IdentityUser
     {
 
-        [Required]
-        [StringLength(256, MinimumLength = 4)]
-        public string Username { get; set; }
+        // Inherits Id, username, etc. from IdentityUser, so not specified here
 
         [Required]
         public bool IsAdmin { get; set; }
