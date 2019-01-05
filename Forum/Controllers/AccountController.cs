@@ -18,6 +18,39 @@ namespace Forum.Controllers
 
         }
 
+        // Login get method
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // Login post method
+        [HttpPost]
+        public async Task<IActionResult> LoginAsync(LoginViewModel vm)
+        {
+
+            // If entered information is valid:
+            if (ModelState.IsValid)
+            {
+
+                // Attempts to login the user with the entered username and password
+                var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
+                
+                // If login successful, redirects them to the homepage
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                // Else, returns an error and returns the login view
+                ModelState.AddModelError("", "Username or password incorrect.");
+                return View(vm);
+            }
+            // Return login view if model is not valid
+            return View(vm);
+        }
+
         // Register get method
         [HttpGet]
         public IActionResult Register()
