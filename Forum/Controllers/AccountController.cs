@@ -15,7 +15,6 @@ namespace Forum.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-
         }
 
         // Login get method

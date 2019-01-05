@@ -9,11 +9,11 @@ namespace Forum.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email Address")]
-        public String Email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        public String Password { get; set; }
+        public string Password { get; set; }
     }
 }

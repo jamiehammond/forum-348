@@ -1,0 +1,26 @@
+﻿@model CreatePostViewModel
+
+<h2>NewPost</h2>
+
+<form method="post" asp-controller="Post" asp-action="CreatePost">
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div>
+        <label asp-for="Content"></label>
+        <input asp-for="Content" />
+        <span asp-validation-for="Content"></span>
+    </div>
+
+    <div>
+        <input type="submit" value="CreatePost" />
+    </div>
+
+</form>
+
+

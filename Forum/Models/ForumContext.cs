@@ -7,7 +7,6 @@ namespace Forum.Models
     {
         public ForumContext(DbContextOptions<ForumContext> options) : base(options)
         {
-
         }
 
         public DbSet<ForumUser> ForumUsers { get; set; }
