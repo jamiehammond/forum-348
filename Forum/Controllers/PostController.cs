@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Forum.Models;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +23,8 @@ namespace Forum.Controllers
         // GET: Post
         public ActionResult Index()
         {
-            return View();
+            var post = _db.Posts.FirstOrDefault(c => c.Id == 9);
+            return View(post);
         }
 
         // GET: Post/Details/5
