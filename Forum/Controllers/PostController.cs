@@ -48,16 +48,18 @@ namespace Forum.Controllers
             {
 
                 // Create new post
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
                 var post = new Post()
                 {
-                    Author = await _userManager.GetUserAsync(HttpContext.User),
+                    Author = currentUser,
+                    AuthorName = currentUser.UserName,
                     Title = vm.Title,
                     Content = vm.Content,
                     DatePosted = DateTime.Now
                 };
                 _db.Posts.Add(post);
                 _db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Post");
             }
             return View(vm);
         }
