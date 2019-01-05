@@ -7,9 +7,12 @@ namespace Forum.Models
     {
 
         [Required]
-        public String Username { get; set; }
+        [EmailAddress]
+        [Display(Name = "Email Address")]
+        public String Email { get; set; }
 
         [Required]
+        [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public String Password { get; set; }
     }

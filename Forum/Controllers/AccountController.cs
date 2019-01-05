@@ -27,7 +27,7 @@ namespace Forum.Controllers
 
         // Login post method
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel vm)
+        public async Task<IActionResult> Login(LoginViewModel vm)
         {
 
             // If entered information is valid:
@@ -35,7 +35,7 @@ namespace Forum.Controllers
             {
 
                 // Attempts to login the user with the entered username and password
-                var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
+                var result = await _signInManager.PasswordSignInAsync(vm.Email, vm.Password, false, false);
                 
                 // If login successful, redirects them to the homepage
                 if (result.Succeeded)
@@ -44,7 +44,7 @@ namespace Forum.Controllers
                 }
 
                 // Else, returns an error and returns the login view
-                ModelState.AddModelError("", "Username or password incorrect.");
+                ModelState.AddModelError("", "Invalid email or password.");
                 return View(vm);
             }
             // Return login view if model is not valid
@@ -67,7 +67,7 @@ namespace Forum.Controllers
             {
 
                 // Create new user
-                var user = new ForumUser { UserName = vm.Username };
+                var user = new ForumUser { UserName = vm.Email, Email = vm.Email };
                 var result = await _userManager.CreateAsync(user, vm.Password);
 
                 // If creation of user is successful, log them in and redirect to home page

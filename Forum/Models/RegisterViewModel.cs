@@ -5,9 +5,10 @@ namespace Forum.Models
     public class RegisterViewModel
     {
         [Required]
+        [EmailAddress]
         [StringLength(256, MinimumLength = 4)]
-        [Display(Name = "Username")]
-        public string Username { get; set; }
+        [Display(Name = "Email Address")]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 8)]
