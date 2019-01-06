@@ -20,5 +20,7 @@ namespace Forum.Models
 
         [Required]
         public DateTime DatePosted { get; set; }
+
+        public Post Post { get; set; }
     }
 }

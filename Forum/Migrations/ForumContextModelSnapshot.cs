@@ -28,6 +28,9 @@ namespace Forum.Migrations
                     b.Property<string>("AuthorId")
                         .IsRequired();
 
+                    b.Property<string>("AuthorName")
+                        .IsRequired();
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(750);
@@ -244,7 +247,7 @@ namespace Forum.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Forum.Models.Post")
+                    b.HasOne("Forum.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
                 });

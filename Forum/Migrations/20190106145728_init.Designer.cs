@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Migrations
 {
     [DbContext(typeof(ForumContext))]
-    [Migration("20190104194336_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20190106145728_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,9 @@ namespace Forum.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AuthorId")
+                        .IsRequired();
+
+                    b.Property<string>("AuthorName")
                         .IsRequired();
 
                     b.Property<string>("Content")
@@ -107,6 +110,9 @@ namespace Forum.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AuthorId")
+                        .IsRequired();
+
+                    b.Property<string>("AuthorName")
                         .IsRequired();
 
                     b.Property<string>("Content")
@@ -243,7 +249,7 @@ namespace Forum.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Forum.Models.Post")
+                    b.HasOne("Forum.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
                 });

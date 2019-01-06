@@ -23,5 +23,17 @@
         <dt>Date Posted:</dt>
         <dd>@Model.DatePosted</dd>
     </dl>
+    <h3>Comments:</h3>
+    @foreach (var item in Model.Comments)
+    {
+        <dl>
+            <dt>Username:</dt>
+            <dd>@item.AuthorName</dd>
+        </dl>
+        <dl>
+            <dt>Content:</dt>
+            <dd>@item.Content</dd>
+        </dl>
+    }
 </body>
 </html>

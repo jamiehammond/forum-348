@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Forum.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -161,6 +161,7 @@ namespace Forum.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<string>(nullable: false),
+                    AuthorName = table.Column<string>(nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
                     Content = table.Column<string>(maxLength: 1000, nullable: false),
                     DatePosted = table.Column<DateTime>(nullable: false)
@@ -183,6 +184,7 @@ namespace Forum.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<string>(nullable: false),
+                    AuthorName = table.Column<string>(nullable: false),
                     Content = table.Column<string>(maxLength: 750, nullable: false),
                     DatePosted = table.Column<DateTime>(nullable: false),
                     PostId = table.Column<int>(nullable: true)

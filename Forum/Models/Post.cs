@@ -26,6 +26,6 @@ namespace Forum.Models
         [Required]
         public DateTime DatePosted { get; set; }
 
-        public virtual IEnumerable<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

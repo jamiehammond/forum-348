@@ -61,10 +61,14 @@ namespace Forum.Controllers
                     Author = currentUser,
                     AuthorName = currentUser.UserName,
                     Content = vm.Content,
-                    DatePosted = DateTime.Now
+                    DatePosted = DateTime.Now,
+                    //PostId = postId
                 };
-                
+                _db.Comments.Add(comment);
+                _db.SaveChanges();
+                return RedirectToAction("ViewPost", "Post", postId);
             }
+            return View(vm);
         }
 
         // Get method for createPost
@@ -84,8 +88,10 @@ namespace Forum.Controllers
             if (ModelState.IsValid)
             {
 
-                // Create new post
+                // Get current user
                 var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+                // Create new post with vm data
                 var post = new Post()
                 {
                     Author = currentUser,
@@ -94,8 +100,10 @@ namespace Forum.Controllers
                     Content = vm.Content,
                     DatePosted = DateTime.Now
                 };
+                // Add post to context and save changes
                 _db.Posts.Add(post);
                 _db.SaveChanges();
+                // View the newly made post
                 return RedirectToAction("ViewPost", "Post", new { postId = post.Id });
             }
             return View(vm);
