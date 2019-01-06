@@ -41,6 +41,32 @@ namespace Forum.Controllers
             return View(posts);
         }
 
+        // Get method of createComment
+        [HttpGet]
+        public IActionResult CreateComment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateComment(CreateCommentViewModel vm, int postId)
+        {
+            // If vm state is valid:
+            if (ModelState.IsValid)
+            {
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                var comment = new Comment()
+                {
+                    Author = currentUser,
+                    AuthorName = currentUser.UserName,
+                    Content = vm.Content,
+                    DatePosted = DateTime.Now
+                };
+                
+            }
+        }
+
         // Get method for createPost
         [HttpGet]
         public IActionResult CreatePost()

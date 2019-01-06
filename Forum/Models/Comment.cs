@@ -12,6 +12,9 @@ namespace Forum.Models
         public ForumUser Author { get; set; }
 
         [Required]
+        public string AuthorName { get; set; }
+
+        [Required]
         [StringLength(750, MinimumLength = 1)]
         public string Content { get; set; }
 
