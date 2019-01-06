@@ -30,8 +30,9 @@ namespace Forum.Controllers
         // View the post of Id postId
         public IActionResult ViewPost(int postId)
         {
-            var post = _db.Posts.FirstOrDefault(c => c.Id == postId);
-            return View(post);
+            var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
+            var comments = _db.Comments.Where(c => c.Post == post);
+            return View((post, comments));
         }
 
         // View a list of all posts
@@ -50,7 +51,7 @@ namespace Forum.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateComment(CreateCommentViewModel vm, int postId)
+        public async Task<IActionResult> CreateComment(string content, int postId)
         {
             // If vm state is valid:
             if (ModelState.IsValid)
@@ -60,15 +61,16 @@ namespace Forum.Controllers
                 {
                     Author = currentUser,
                     AuthorName = currentUser.UserName,
-                    Content = vm.Content,
+                    Content = content,
                     DatePosted = DateTime.Now,
-                    //PostId = postId
+                    Post = _db.Posts.Find(postId)
                 };
                 _db.Comments.Add(comment);
+                _db.Posts.Find(postId).Comments.Add(comment);
                 _db.SaveChanges();
                 return RedirectToAction("ViewPost", "Post", postId);
             }
-            return View(vm);
+            return View();
         }
 
         // Get method for createPost

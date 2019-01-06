@@ -1,20 +1,17 @@
 ﻿@model  ICollection<Post>
 
-<h2>ListPosts</h2>
+<h2>Posts</h2>
 
 <html>
 <head>
-    <title>Forum Posts</title>
+    <title>Posts</title>
 </head>
 <body>
     @foreach (var item in Model)
     {
-        <dl>
-            <dt>Post Title:</dt>
-            <dd>@item.Title</dd>
-            <dd>@item.Id</dd>
-            <dd><a asp-action="ViewPost" asp-controller="Post" asp-route-postId="@item.Id">View Post</a></dd>
-        </dl>
+    <dl>
+        <dt><a asp-action="ViewPost" asp-controller="Post" asp-route-postId="@item.Id">@item.Title</a></dt>
+    </dl>
         <dl>
             <dt>Author:</dt>
             <dd>@item.AuthorName</dd>

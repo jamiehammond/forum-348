@@ -26,6 +26,7 @@ namespace Forum.Controllers
 
         // Login post method
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
 
@@ -59,6 +60,7 @@ namespace Forum.Controllers
 
         // Register post method
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             // If entered information is valid:

@@ -1,39 +1,30 @@
-﻿@model Post
+﻿@model ValueTuple<Post, IQueryable<Comment>>
 
-<h2>View Post</h2>
+<h2>@Model.Item1.Title</h2>
 
 <html>
 <head>
-    <title>@Model.Title</title>
+    <title>@Model.Item1.Title</title>
 </head>
 <body>
-    <dl>
-        <dt>Username:</dt>
-        <dd>@Model.AuthorName</dd>
-    </dl>
-    <dl>
-        <dt>Title:</dt>
-        <dd>@Model.Title</dd>
-    </dl>
-    <dl>
-        <dt>Content:</dt>
-        <dd>@Model.Content</dd>
-    </dl>
-    <dl>
-        <dt>Date Posted:</dt>
-        <dd>@Model.DatePosted</dd>
-    </dl>
+    <p>@Model.Item1.Content</p>
+    <p>Posted by: <b>@Model.Item1.AuthorName</b> at <b>@Model.Item1.DatePosted</b></p>
     <h3>Comments:</h3>
-    @foreach (var item in Model.Comments)
+    <form method="post" asp-controller="Post" asp-action="CreateComment" asp-route-postId="@Model.Item1.Id">
+        <input type="text" name="content" placeholder="Enter comment here" />
+        <input type="submit" value="Submit" />
+    </form>
+    <br />
+    @if (Model.Item2 != null)
     {
-        <dl>
-            <dt>Username:</dt>
-            <dd>@item.AuthorName</dd>
-        </dl>
-        <dl>
-            <dt>Content:</dt>
-            <dd>@item.Content</dd>
-        </dl>
+        @foreach (var item in Model.Item2)
+        {
+            <dl>
+                <dt>@item.AuthorName at @item.DatePosted:</dt>
+                <dd>@item.Content</dd>
+            </dl>
+        }
     }
+
 </body>
 </html>
