@@ -1,0 +1,27 @@
+﻿@model Post
+
+<h2>View Post</h2>
+
+<html>
+<head>
+    <title>@Model.Title</title>
+</head>
+<body>
+    <dl>
+        <dt>Username:</dt>
+        <dd>@Model.AuthorName</dd>
+    </dl>
+    <dl>
+        <dt>Title:</dt>
+        <dd>@Model.Title</dd>
+    </dl>
+    <dl>
+        <dt>Content:</dt>
+        <dd>@Model.Content</dd>
+    </dl>
+    <dl>
+        <dt>Date Posted:</dt>
+        <dd>@Model.DatePosted</dd>
+    </dl>
+</body>
+</html>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Forum.Models;
@@ -20,29 +21,37 @@ namespace Forum.Controllers
             _db = db;
         }
 
-        // GET: Post
-        public ActionResult Index()
+        // Index method
+        public IActionResult Index()
         {
-            var post = _db.Posts.FirstOrDefault(c => c.Id == 9);
+            return View();
+        }
+
+        // View the post of Id postId
+        public IActionResult ViewPost(int postId)
+        {
+            var post = _db.Posts.FirstOrDefault(c => c.Id == postId);
             return View(post);
         }
 
-        // GET: Post/Details/5
-        public ActionResult Details(int id)
+        // View a list of all posts
+        public IActionResult PostList()
         {
-            return View();
+            ICollection<Post> posts = _db.Posts.ToList();
+            return View(posts);
         }
 
+        // Get method for createPost
         [HttpGet]
-        public ActionResult CreatePost()
+        public IActionResult CreatePost()
         {
             return View();
         }
 
-        // POST: Post/Create
+        // Post method to create a new post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreatePost(CreatePostViewModel vm)
+        public async Task<IActionResult> CreatePost(CreatePostViewModel vm)
         {
             
             // If vm state is valid:
@@ -61,55 +70,9 @@ namespace Forum.Controllers
                 };
                 _db.Posts.Add(post);
                 _db.SaveChanges();
-                return RedirectToAction("Index", "Post");
+                return RedirectToAction("ViewPost", "Post", new { postId = post.Id });
             }
             return View(vm);
-        }
-
-        // GET: Post/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Post/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Post/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Post/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
