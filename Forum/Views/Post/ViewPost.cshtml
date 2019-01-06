@@ -1,4 +1,4 @@
-﻿@model ValueTuple<Post, IQueryable<Comment>>
+﻿@model ValueTuple<Post, ICollection<Comment>>
 
 <h2>@Model.Item1.Title</h2>
 
@@ -7,20 +7,25 @@
     <title>@Model.Item1.Title</title>
 </head>
 <body>
+
     <p>@Model.Item1.Content</p>
     <p>Posted by: <b>@Model.Item1.AuthorName</b> at <b>@Model.Item1.DatePosted</b></p>
+
     <h3>Comments:</h3>
+
     <form method="post" asp-controller="Post" asp-action="CreateComment" asp-route-postId="@Model.Item1.Id">
-        <input type="text" name="content" placeholder="Enter comment here" />
+        <input type="text" maxlength="250" required name="content" placeholder="Enter comment here" />
         <input type="submit" value="Submit" />
     </form>
+
     <br />
+
     @if (Model.Item2 != null)
     {
-        @foreach (var item in Model.Item2)
+        @foreach (var item in Model.Item2.Reverse())
         {
             <dl>
-                <dt>@item.AuthorName at @item.DatePosted:</dt>
+                <dt>@item.AuthorName at @item.DatePosted</dt>
                 <dd>@item.Content</dd>
             </dl>
         }

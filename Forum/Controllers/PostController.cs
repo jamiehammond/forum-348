@@ -31,7 +31,7 @@ namespace Forum.Controllers
         public IActionResult ViewPost(int postId)
         {
             var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
-            var comments = _db.Comments.Where(c => c.Post == post);
+            ICollection<Comment> comments = _db.Comments.Where(c => c.Post == post).ToList();
             return View((post, comments));
         }
 
@@ -68,9 +68,9 @@ namespace Forum.Controllers
                 _db.Comments.Add(comment);
                 _db.Posts.Find(postId).Comments.Add(comment);
                 _db.SaveChanges();
-                return RedirectToAction("ViewPost", "Post", postId);
+                return RedirectToAction("ViewPost", "Post", new { postId });
             }
-            return View();
+            return RedirectToAction("ViewPost", "Post", new { postId });
         }
 
         // Get method for createPost
