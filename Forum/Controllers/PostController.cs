@@ -64,7 +64,6 @@ namespace Forum.Controllers
                 var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 var comment = new Comment()
                 {
-                    Author = currentUser,
                     AuthorName = currentUser.UserName,
                     Content = content,
                     DatePosted = DateTime.Now,
@@ -103,7 +102,6 @@ namespace Forum.Controllers
                 // Create new post with vm data
                 var post = new Post()
                 {
-                    Author = currentUser,
                     AuthorName = currentUser.UserName,
                     Title = vm.Title,
                     Content = vm.Content,

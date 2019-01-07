@@ -9,9 +9,6 @@ namespace Forum.Models
         public int Id { get; set; }
 
         [Required]
-        public ForumUser Author { get; set; }
-
-        [Required]
         public string AuthorName { get; set; }
 
         [Required]
