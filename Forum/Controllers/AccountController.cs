@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Controllers
 {
+    // Controller for account functions such as registering, logging in and logging out
     public class AccountController : Controller
     {
         private readonly UserManager<ForumUser> _userManager;
@@ -17,6 +18,7 @@ namespace Forum.Controllers
             _signInManager = signInManager;
         }
 
+        // Logs the current user out
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -36,13 +38,12 @@ namespace Forum.Controllers
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
 
-            // If entered information is valid:
+            // If entered viemodel information is valid:
             if (ModelState.IsValid)
             {
-
                 // Attempts to login the user with the entered username and password
                 var result = await _signInManager.PasswordSignInAsync(vm.Email, vm.Password, false, false);
-                
+
                 // If login successful, redirects them to the homepage
                 if (result.Succeeded)
                 {
@@ -69,7 +70,7 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel vm)
         {
-            // If entered information is valid:
+            // If entered viewmodel information is valid:
             if (ModelState.IsValid)
             {
 
@@ -96,6 +97,7 @@ namespace Forum.Controllers
             return View(vm);
         }
 
+        // Default path for authorisation access denied, if the current user does not have the required role
         public IActionResult AccessDenied()
         {
             return View();

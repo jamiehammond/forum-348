@@ -5,7 +5,6 @@ namespace Forum.Models
 {
     public class LoginViewModel
     {
-
         [Required]
         [EmailAddress]
         [Display(Name = "Email Address")]

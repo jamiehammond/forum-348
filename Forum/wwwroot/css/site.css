@@ -26,16 +26,11 @@ a {
     color: Highlight;
 }
 
-.navbar-inverse {
-    color: black;
-}
-
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    color: darkblue;
 }
 
 /* QR code generator */
@@ -45,8 +40,4 @@ a {
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
 }

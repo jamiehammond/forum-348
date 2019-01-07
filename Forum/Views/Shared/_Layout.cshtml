@@ -40,14 +40,13 @@
                     @* Navbar links to areas of the site *@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                    <li><a  asp-controller="Account" asp-action="Login">Login</a></li>
+                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
 
                     @* Only shows the Logout button if the user is currently logged in *@
                     @if (signInManager.IsSignedIn(User))
                     {
                         <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
                     }
-                    <li><a>Cool</a></li>
                 </ul>
             </div>
         </div>

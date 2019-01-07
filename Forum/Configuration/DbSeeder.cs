@@ -1,15 +1,13 @@
 ﻿using Forum.Models;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forum.Configuration
 {
+    // Seeds the database with initial users and roles
     public static class DbSeeder
     {
-        // Seeds the database
+
+        // Creates the database if there isn't one, then seeds the roles and users
         public static void Seed(ForumContext db, UserManager<ForumUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             db.Database.EnsureCreated();
@@ -18,6 +16,7 @@ namespace Forum.Configuration
             SeedUsers(userManager);
         }
 
+        // Seeds the users with usernames, passwords, and roles
         public static void SeedUsers(UserManager<ForumUser> userManager)
         {
             CreateUser("Member1@email.com", "Password123!", "Member", userManager);
@@ -28,6 +27,7 @@ namespace Forum.Configuration
             CreateUser("Customer5@email.com", "Password123!", "Customer", userManager);
         }
 
+        // Seeds the roles
         public static void SeedRoles(RoleManager<IdentityRole> roleManager)
         {
             CreateRole("Member", roleManager);
@@ -48,12 +48,7 @@ namespace Forum.Configuration
             userManager.CreateAsync(user, password).Wait();
 
             var currentUser = userManager.FindByNameAsync(user.UserName).Result;
-            if (currentUser == null)
-            {
-            } else
-            {
-                userManager.AddToRoleAsync(currentUser, role).Wait();
-            }
+            userManager.AddToRoleAsync(currentUser, role).Wait();
         }
     }
 }

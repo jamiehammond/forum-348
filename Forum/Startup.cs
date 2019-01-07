@@ -30,7 +30,7 @@ namespace Forum
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            // Adding required services
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var connection = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Forum;Integrated Security=True;Connect Timeout=30;";
             services.AddDbContext<ForumContext>(options => options.UseSqlServer(connection));
@@ -66,6 +66,7 @@ namespace Forum
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            // Seeds the database
             DbSeeder.Seed(db, userManager, roleManager);
 
 
