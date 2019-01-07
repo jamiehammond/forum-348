@@ -3,6 +3,31 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: black;
+    background-image: url(../images/background.jpg);
+}
+
+div {
+    background-color: ghostwhite;
+    color: darkblue;
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+dt {
+    word-wrap: break-word;
+}
+
+dd {
+    word-wrap: break-word;
+}
+
+a {
+    color: Highlight;
+}
+
+.navbar-inverse {
+    color: black;
 }
 
 /* Wrapping element */
@@ -10,17 +35,7 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
-
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+    color: darkblue;
 }
 
 /* QR code generator */

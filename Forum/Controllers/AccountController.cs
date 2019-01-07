@@ -17,6 +17,12 @@ namespace Forum.Controllers
             _signInManager = signInManager;
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         // Login get method
         [HttpGet]
         public IActionResult Login()

@@ -13,10 +13,11 @@
 
     <h3>Comments:</h3>
 
-    <form method="post" asp-controller="Post" asp-action="CreateComment" asp-route-postId="@Model.Item1.Id">
-        <input type="text" maxlength="250" required name="content" placeholder="Enter comment here" />
+    <textarea rows="2" cols="50" maxlength="500" required name="content" placeholder="Enter comment here" form="commentForm"></textarea>
+    <form method="post" id="commentForm" asp-controller="Post" asp-action="CreateComment" asp-route-postId="@Model.Item1.Id">
         <input type="submit" value="Submit" />
     </form>
+    
 
     <br />
 
