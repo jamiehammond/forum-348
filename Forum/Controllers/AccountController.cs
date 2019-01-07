@@ -89,5 +89,11 @@ namespace Forum.Controllers
             // Return register view if model is not valid
             return View(vm);
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
     }
 }

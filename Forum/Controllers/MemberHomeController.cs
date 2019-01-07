@@ -1,13 +1,26 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Forum.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class MemberHomeController : Controller
     {
+
+        private readonly UserManager<ForumUser> _userManager;
+
+        public MemberHomeController(UserManager<ForumUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
+
+            var claims = User.Claims;
             return View();
         }
 

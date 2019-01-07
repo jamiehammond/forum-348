@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Forum.Models;
 using Microsoft.AspNetCore.Identity;
+using Forum.Configuration;
 
 namespace Forum
 {
@@ -36,6 +37,7 @@ namespace Forum
             services.AddIdentity<ForumUser, IdentityRole>()
                 .AddEntityFrameworkStores<ForumContext>()
                 .AddDefaultTokenProviders();
+            services.AddTransient<ForumContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +64,18 @@ namespace Forum
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            /*IServiceScopeFactory scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+
+            using (IServiceScope scope = scopeFactory.CreateScope())
+            {
+                RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            }*/
+
+            
         }
+
+
     }
 }

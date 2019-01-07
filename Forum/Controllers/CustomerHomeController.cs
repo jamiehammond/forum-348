@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Forum.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class CustomerHomeController : Controller
     {
         public IActionResult Index()
         {

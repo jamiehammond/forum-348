@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Forum.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private readonly UserManager<ForumUser> _userManager;
@@ -30,6 +32,7 @@ namespace Forum.Controllers
         // View the post of Id postId
         public IActionResult ViewPost(int postId)
         {
+
             var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
             ICollection<Comment> comments = _db.Comments.Where(c => c.Post == post).ToList();
             return View((post, comments));
@@ -85,7 +88,7 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePost(CreatePostViewModel vm)
         {
-            
+
             // If vm state is valid:
             if (ModelState.IsValid)
             {

@@ -24,8 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\AdminHome\" />
-    <Folder Include="Views\CustomerHome\" />
+    <Content Update="Views\AdminHome\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\CustomerHome\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>
