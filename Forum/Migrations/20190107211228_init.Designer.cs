@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Migrations
 {
     [DbContext(typeof(ForumContext))]
-    [Migration("20190106154844_removed lazy loading")]
-    partial class removedlazyloading
+    [Migration("20190107211228_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,8 +64,6 @@ namespace Forum.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("IsAdmin");
 
                     b.Property<bool>("LockoutEnabled");
 

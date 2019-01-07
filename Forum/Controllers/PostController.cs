@@ -61,7 +61,7 @@ namespace Forum.Controllers
             // If vm state is valid:
             if (ModelState.IsValid)
             {
-                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 var comment = new Comment()
                 {
                     Author = currentUser,
@@ -98,7 +98,7 @@ namespace Forum.Controllers
             {
 
                 // Get current user
-                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+                var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
 
                 // Create new post with vm data
                 var post = new Post()

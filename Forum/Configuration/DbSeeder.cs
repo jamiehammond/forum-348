@@ -14,8 +14,8 @@ namespace Forum.Configuration
         {
             db.Database.EnsureCreated();
 
-            SeedUsers(userManager);
             SeedRoles(roleManager);
+            SeedUsers(userManager);
         }
 
         public static void SeedUsers(UserManager<ForumUser> userManager)
