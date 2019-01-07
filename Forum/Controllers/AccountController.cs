@@ -78,9 +78,11 @@ namespace Forum.Controllers
                 var user = new ForumUser { UserName = vm.Email, Email = vm.Email };
                 var result = await _userManager.CreateAsync(user, vm.Password);
 
-                // If creation of user is successful, log them in and redirect to home page
+                // If creation of user is successful, add the customer role to them, log them in and redirect to home page
                 if (result.Succeeded)
                 {
+                    var currentUser = _userManager.FindByNameAsync(user.UserName).Result;
+                    await _userManager.AddToRoleAsync(currentUser, "Customer");
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
