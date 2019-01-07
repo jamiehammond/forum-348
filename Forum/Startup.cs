@@ -41,7 +41,8 @@ namespace Forum
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ForumContext db, UserManager<ForumUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -65,15 +66,9 @@ namespace Forum
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            /*IServiceScopeFactory scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            DbSeeder.Seed(db, userManager, roleManager);
 
-            using (IServiceScope scope = scopeFactory.CreateScope())
-            {
-                RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            }*/
-
-            
         }
 
 

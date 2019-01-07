@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers
 {
-    [Authorize]
+
+    // Post controller - for viewing, creating and commenting on posts
+    [Authorize(Roles = "Member, Customer")]
     public class PostController : Controller
     {
         private readonly UserManager<ForumUser> _userManager;
@@ -78,6 +80,7 @@ namespace Forum.Controllers
 
         // Get method for createPost
         [HttpGet]
+        [Authorize(Roles = "Member")]
         public IActionResult CreatePost()
         {
             return View();
@@ -86,6 +89,7 @@ namespace Forum.Controllers
         // Post method to create a new post
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> CreatePost(CreatePostViewModel vm)
         {
 
