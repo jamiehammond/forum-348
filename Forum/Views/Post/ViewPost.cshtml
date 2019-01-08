@@ -17,8 +17,6 @@
     <form method="post" id="commentForm" asp-controller="Post" asp-action="CreateComment" asp-route-postId="@Model.Item1.Id">
         <input type="submit" value="Submit" />
     </form>
-    
-
     <br />
 
     @if (Model.Item2 != null)
@@ -29,6 +27,7 @@
                 <dt>@item.AuthorName at @item.DatePosted</dt>
                 <dd>@item.Content</dd>
             </dl>
+            <hr/>
         }
     }
 
