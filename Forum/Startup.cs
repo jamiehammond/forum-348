@@ -13,10 +13,7 @@ namespace Forum
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
@@ -30,14 +27,17 @@ namespace Forum
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
             // Adding required services
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var connection = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Forum;Integrated Security=True;Connect Timeout=30;";
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddRazorPages();
+            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Forum;Integrated Security=True;Connect Timeout=30;";
             services.AddDbContext<ForumContext>(options => options.UseSqlServer(connection));
             services.AddIdentity<ForumUser, IdentityRole>()
                 .AddEntityFrameworkStores<ForumContext>()
                 .AddDefaultTokenProviders();
             services.AddTransient<ForumContext>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +58,13 @@ namespace Forum
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            // app.UseRouting();
+
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapRazorPages();
+            // });
 
             app.UseMvc(routes =>
             {
